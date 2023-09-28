@@ -2,7 +2,7 @@ samples =["father", "mother", "proband"]
 
 rule all: 
     input: 
-        expan("mapped_reads/{sample}.bam", sample = samples)
+        expand("mapped_reads/{sample}.bam", sample = samples)
 
 rule bwa_map: 
     input:
