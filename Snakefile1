@@ -1,0 +1,24 @@
+fastqc_output = ["father_R1_fastqc.html", "mother_R1_fastqc.html", "proband_R1_fastqc.html, "father_R2_fastqc.html", "mother_R2_fastqc.html", "proband_R2_fastqc.html"]
+
+rule all:
+  input:
+    "multiqc_report.html"
+
+rule fastqc_a_file:
+  input:
+    "{filename}.fq.gz"
+  output:
+    "{filename}_fastqc.html",
+    "{filename}_fastqc.zip"
+  shell:
+    "fastqc {input}"
+
+rule run_multiqc:
+  input:
+    fastqc_output
+  output:
+    "multiqc_report.html",
+    directory("multiqc_data")
+  shell:
+    "multiqc data/"
+
